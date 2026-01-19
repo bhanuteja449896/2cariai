@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
     report_type: '',
     start_date: '',
@@ -22,10 +23,12 @@ const Reports = () => {
   const fetchReports = async (filterParams = {}) => {
     try {
       setLoading(true);
+      setError(null);
       const data = await reportService.getReports(filterParams);
       setReports(data.reports);
     } catch (error) {
       console.error('Error fetching reports:', error);
+      setError(error.response?.data?.error || 'Failed to load reports');
     } finally {
       setLoading(false);
     }
@@ -69,6 +72,10 @@ const Reports = () => {
             <FiUpload /> Upload Report
           </Link>
         </div>
+
+        {error && (
+          <div className="alert alert-error">{error}</div>
+        )}
 
         <div className="card">
           <h3 className="mb-2"><FiFilter /> Filters</h3>
