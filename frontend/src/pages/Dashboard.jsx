@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { reportService, vitalsService } from '../services';
 import { FiFileText, FiActivity, FiUpload, FiTrendingUp } from 'react-icons/fi';
 import Loading from '../components/Loading';
+import HealthCheck from '../components/HealthCheck';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -44,6 +45,9 @@ const Dashboard = () => {
           <h1 className="page-title">Dashboard</h1>
           <p className="page-subtitle">Welcome to your Health Wallet</p>
         </div>
+
+        {/* Health Check Component */}
+        <HealthCheck />
 
         <div className="grid grid-cols-3 mb-3">
           <div className="card">
